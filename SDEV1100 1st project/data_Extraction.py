@@ -1,6 +1,6 @@
 #
 # Rylee Leavitt
-# 1/26/2025, 2/28/25, 3/5/2025
+# 3/5/2025
 # SDEV1100 1st project
 # SDEV 1100
 #
@@ -64,22 +64,15 @@ def extract_data_from_excel(directory, metrics):
         #take all the extracted data
 
         organized_data = pd.concat(extracted_data, ignore_index=True)
+        #pd.concat: combine multiple DataFrames (extracted data)
+        #Igrnoring the initial index so there isnt any duplicate information
+
         return organized_data
+        #return the data
+
     else:
-        print("No data extracted.")
+        #Otherwise, tell the user no data was extracted and thus nothing can be put in the CSV
+        print("No data extracted. The CSV cannot be updated.")
+
+        #returns the panda (pd) data frame
         return pd.DataFrame()
-
-# Example usage
-if __name__ == "__main__":
-    directory_path = input("Enter the directory path containing Excel files: ")
-    metrics_to_extract = ["temperature", "flow rate", "pressure"]  # Example fields
-
-    # Extract data
-    result_df = extract_data_from_excel(directory_path, metrics_to_extract)
-
-    # Save organized data to a new Excel file
-    if not result_df.empty:
-        output_file = "organized_data.xlsx"
-        result_df.to_excel(output_file, index=False)
-        print(f"Data saved to {output_file}")
-
