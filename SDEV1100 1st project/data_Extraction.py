@@ -14,7 +14,7 @@ import os #imports the os module
     #identifying and extracting relevant data fields
             #such as temperature, flow rate, pressure, and any other specified metrics.
 
-def extract_data_from_excel(directory, output_file):
+def extract_data(directory, output_file):
 
     # Fields to extract (temperature, flow rate, pressure)
     relevant_fields = ['Temperature', 'Flow Rate', 'Pressure']
@@ -74,5 +74,5 @@ directory = r"path_to_your_directory"
 output_file = r"path_to_output_file\extracted_data.xlsx"
 #This defines the name and location of the output file
 
-extract_data_from_excel(directory, output_file)
+extract_data(directory, output_file)
 #calls the function
