@@ -14,35 +14,35 @@ import os #imports the os module
     #identifying and extracting relevant data fields
             #such as temperature, flow rate, pressure, and any other specified metrics.
 
-def extract_data_from_excel(directory, metrics):
-    #Defines a function to extract data from the excel files
+def extract_data_from_excel(directory, output_file):
 
-    #Reads Excel files in the specified directory and extracts specified metrics.
-        #directory example) C:/MyFolder
-        #metrics: temperature, flow rate, pressure
-        #Returns pd.DataFrame: DataFrame containing the organized extracted data.
+    # Fields to extract (temperature, flow rate, pressure)
+    relevant_fields = ['Temperature', 'Flow Rate', 'Pressure']
 
-    extracted_data = []
-    #initializes an empty list called extracted_data
+    # Create an empty DataFrame to store results
+    extracted_data = pd.DataFrame()
 
-    # Iterate through all files in the directory
     for filename in os.listdir(directory):
         #Creates a For loop that will iterate through all the files and folders located within a specified directory
         #ex) os.listdir("C:/Documents")
 
-        if filename.endswith(".xlsx") or filename.endswith(".xls"):
+        if filename.endswith('.xlsx') or filename.endswith('.xls'):
             # if the name of the file ends withb.xlsx (excel file)
 
-            filepath = os.path.join(directory, filename)
+            file_path = os.path.join(directory, filename)
             #generates the full path to the file
             #ex) C:/Documents/file1.xlsx
 
+            print(f"Processing file: {filename}")
+            #tells the user which file is processing
+            
+            # Read the Excel file
             try:
                 #reads an Excel file and store its contents into a DataFrame (df)
-                df = pd.read_excel(filepath)
+                df = pd.read_excel(file_path)
 
-                # Filter relevant columns 
-                filtered_data = df[metrics]
+                # Extract relevant fields
+                filtered_data = df[relevant_fields]
                 #This selects specific columns from the DataFrame
 
                 filtered_data["Source_File"] = filename
@@ -50,29 +50,29 @@ def extract_data_from_excel(directory, metrics):
                     #helps us track what info was processd from each file
                     #the filename variable contains the name of the current Excel file being processed
 
-                extracted_data.append(filtered_data)
-                #adds the filtered_data DataFrame to the end of the extracted_data list
+                # Append to the main DataFrame
+                extracted_data = pd.concat([extracted_data, filtered_data], ignore_index=True)
+                #combining two DataFrames—extracted_data and filtered_data—into one
+                #ignore_index=True resets the index of the combined DataFrame to a continuous range
 
             except Exception as e:
-                # if an error occurs thr program jumps to except block
-
                 print(f"Error processing file {filename}: {e}")
                 #Tells the user when, and which file the error occured
 
-    # Combine all extracted data
-    if extracted_data:
-        #take all the extracted data
+    # Save the extracted data to a new CSV file
+    extracted_data.to_csv(output_file, index=False)
+    #This command writes the extracted_data DataFrame to a CSV file specified by the output_file variable.
+    
+    print(f"Data extraction complete. Results saved to {output_file}")
+    #tells the user the extraction is complete and saved to a specific file
 
-        organized_data = pd.concat(extracted_data, ignore_index=True)
-        #pd.concat: combine multiple DataFrames (extracted data)
-        #Igrnoring the initial index so there isnt any duplicate information
 
-        return organized_data
-        #return the data
+# Usage
+directory = r"path_to_your_directory"
+#This line specifies the folder or directory where the Excel files are located.
 
-    else:
-        #Otherwise, tell the user no data was extracted and thus nothing can be put in the CSV
-        print("No data extracted. The CSV cannot be updated.")
+output_file = r"path_to_output_file\extracted_data.xlsx"
+#This defines the name and location of the output file
 
-        #returns the panda (pd) data frame
-        return pd.DataFrame()
+extract_data_from_excel(directory, output_file)
+#calls the function
