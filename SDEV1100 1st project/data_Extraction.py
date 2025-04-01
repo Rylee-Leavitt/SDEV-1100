@@ -66,12 +66,12 @@ def extract_data(directory, output_file):
     print(f"Data extraction complete. Results saved to {output_file}")
     #tells the user the extraction is complete and saved to a specific file
 
-
+import sys
 # Usage
-directory = r"path_to_your_directory"
+directory = sys.argv[2]
 #This line specifies the folder or directory where the Excel files are located.
 
-output_file = r"path_to_output_file\extracted_data.xlsx"
+output_file = sys.argv[1]
 #This defines the name and location of the output file
 
 extract_data(directory, output_file)

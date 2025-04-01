@@ -1,0 +1,7 @@
+These tests are tests for testing the test
+
+[2025-03-27T19:29:21Z INFO  sdev1100] Main lemurs logger is running
+[2025-02-27T19:29:21Z INFO  caow] Switching to tty 2
+[2025-01-27T19:29:21Z INFO  sdev1100] UI booted up
+[2025-00-27T19:29:21Z INFO  lemurs::info_caching] Attempting to get a cached information from '/var/cache/lemurs'
+[20202020202020202020202020202020202020202021112
