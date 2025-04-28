@@ -11,6 +11,9 @@
 # Import necessary libraries
 #Library/Module Imports: Project Pt. 1 2/28/2025
 
+from flask import Flask
+app = Flask (__name__)
+
 import pandas as pd #imports the pandas library with the alias pd
 import os #imports the os module
 
