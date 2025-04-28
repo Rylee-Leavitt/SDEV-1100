@@ -1,3 +1,13 @@
+#
+# Rylee Leavitt
+# 4/27/25
+# SDEV1100 1st project
+# SDEV 1100
+#
+
+#__init__.py
+#Flask tutorial
+
 #create_app is the application factory function.
 import os
 
