@@ -59,3 +59,18 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     return app
+
+#
+def create_app():
+    app = ...
+    # existing code omitted
+
+    from . import db
+    db.init_app(app)
+
+    return app
+
+#Initialize the Database File
+    #$ flask --app flaskr init-db
+    # Initialized the database.
+    #There will now be a flaskr.sqlite file in the instance folder in your project.

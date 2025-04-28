@@ -90,3 +90,4 @@ def init_app(app):
     #app.teardown_appcontext() tells Flask to call that function when cleaning up after returning the response.
     
     app.cli.add_command(init_db_command)
+    #app.cli.add_command() adds a new command that can be called with the flask command.
